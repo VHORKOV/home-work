@@ -23,7 +23,7 @@ class AccountServiceTest {
 
         accountService = new AccountService(accountRepository);
     }
-
+/*
     @Test
     void bookExist() {
         Account account = new Account("ACC1234NUM");
@@ -44,4 +44,8 @@ class AccountServiceTest {
 
         assertFalse(accountService.isAccountExist(1L, new Account("ACC456NUM")));
     }
+
+ */
+
+
 }

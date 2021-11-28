@@ -1,5 +1,7 @@
 package com.sbrf.reboot.service;
 
+import java.io.IOException;
+
 public class AccountService {
     private AccountRepository accountRepository;
 
@@ -7,7 +9,7 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public boolean isAccountExist(long id, Account account) {
+    public boolean isAccountExist(long id, Account account) throws IOException {
         return accountRepository.getAllAccountsByClientId(id).contains(account);
     }
 }
