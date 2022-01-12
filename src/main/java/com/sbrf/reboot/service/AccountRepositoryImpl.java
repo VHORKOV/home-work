@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +32,7 @@ public class AccountRepositoryImpl implements AccountRepository{
                 System.out.println(line);
                 String[] array=line.split(",");
                 System.out.println(array[0]);
-                accounts.add(new Account(Long.parseLong(array[0]),array[1]));
+                accounts.add(new Account(Long.parseLong(array[0]),Long.parseLong(array[1]), LocalDate.now(), BigDecimal.ZERO));
             }
         }catch (FileNotFoundException fnf){
             System.out.println(fnf.getMessage());
@@ -51,9 +53,11 @@ public class AccountRepositoryImpl implements AccountRepository{
         return
                 getAccounts()
                 .stream()
-                .filter(account -> account.clientId == clientId) //зесь приходится делать clientid видимым, как этого избежать
+                .filter(account -> account.getClientId() == clientId)
                 .collect(Collectors.toSet());
 
 
     }
+
+
 }
