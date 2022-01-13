@@ -1,7 +1,5 @@
 package com.sbrf.reboot.service;
 
-import com.sbrf.reboot.dto.Account;
-import com.sbrf.reboot.repository.AccountRepository;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,21 +49,21 @@ class AccountServiceTest {
 
         assertFalse(accountService.isAccountExist(1L, new Account("ACC456NUM")));
     }
-
+*/
     @SneakyThrows
     @Test
     void getMaxAccountBalance() {
-        Account accountWithMaxBalance = Account.builder().clientId(1L).id(4L).balance(new BigDecimal(150000)).build();
+        Account accountWithMaxBalance = Account.builder().clientId(1L).clientId(4L).balance(new BigDecimal(150000)).build();
         Set<Account> accounts = new HashSet() {{
-            add(Account.builder().clientId(1L).id(1L).balance(BigDecimal.TEN).build());
-            add(Account.builder().clientId(1L).id(2L).balance(new BigDecimal(200)).build());
-            add(Account.builder().clientId(1L).id(3L).balance(new BigDecimal("1.65")).build());
+            add(Account.builder().clientId(1L).clientId(1L).balance(BigDecimal.TEN).build());
+            add(Account.builder().clientId(1L).clientId(2L).balance(new BigDecimal(200)).build());
+            add(Account.builder().clientId(1L).clientId(3L).balance(new BigDecimal("1.65")).build());
             add(accountWithMaxBalance);
         }};
 
         when(accountRepository.getAllAccountsByClientId(1L)).thenReturn(accounts);
 
-        assertEquals(accountWithMaxBalance, accountService.getMaxAccountBalance(1L));
+        assertEquals(accountWithMaxBalance.getBalance(), accountService.getMaxAccountBalance(1L));
     }
 
 
